@@ -1,4 +1,10 @@
 ```
+SRP
+OCP
+LSP
+ISP
+DIP
+
 Single Responsibility
 
 A class should have only one and only one reason to change.
@@ -130,4 +136,94 @@ The Liskov Substitution Principle (LSP) applies to inheritance hierarchies such 
 
 Subtypes must be substitutable for their base types.
 
+Example 1:
+
+public class Rectangle {
+    private double height;
+    private double width;
+    public void setHeight(double h) { height = h; }
+    public void setWidth(double w) { width = w; }
+    ...
+}
+public class Square extends Rectangle {
+    public void setHeight(double h) {
+        super.setHeight(h);
+        super.setWidth(h);
+    }
+    public void setWidth(double w) {
+        super.setHeight(w);
+        super.setWidth(w);
+    }
+}
+
+The above classes do not obey LSP because you cannot replace the Rectangle base class with its derived class Square. The Square class has extra constraints, i.e., the height and width must be the same. Therefore, substituting Rectangle with Square class may result in unexpected behavior.
+
+Example 2:
+
+class Rectangle {
+   void setWidth(double w)
+   void setHeight(double h)
+   double getWidth()
+   double getHeight()
+}
+
+class Square {
+   void setWidth(double w)
+   void setHeight(double h)
+   double getWidth()
+   double getHeight()
+}
+
+LSP says its a bad implementation 
+
+void test(Rectangle r)
+{
+  r.setWidth(5);
+  r.setHeight(4);
+  assertEquals(5 * 4, r.getWidth() * r.getHeight());
+}
+
+Square won't pass here as width and height will be the same.
+
+Inheritance should only be used when super class is replacable by
+sub class. It shouldn't be used just to save a few lines of code.
+
+Interface Segregation Principle ISP
+
+No client should be forced to depend on methods that it does not use.
+
+The dependency of one class to another one should depend on the smallest
+possible interface.
+
+Clients should not be forced to implement interfaces they don't use.
+
+Instead of one fat interface many small interfaces are preferred based on
+groups of methods, each one serving one submodule.
+
+The Interface Segregation Principle (ISP) states that clients should not be forced to depend upon interface members they do not use. In other words, do not force any client to implement an interface that is irrelevant to them.
+
+Suppose there’s an interface for vehicle and a Bike class:
+
+public interface Vehicle {
+    public void drive();
+    public void stop();
+    public void refuel();
+    public void openDoors();
+}
+public class Bike implements Vehicle {
+
+    // Can be implemented
+    public void drive() {...}
+    public void stop() {...}
+    public void refuel() {...}
+    
+    // Can not be implemented
+    public void openDoors() {...}
+}
+
+As you can see, it does not make sense for a Bike class to implement the openDoors() method as a bike does not have any doors! To fix this, ISP proposes that the interfaces be broken down into multiple, small cohesive interfaces so that no class is forced to implement any interface, and therefore methods, that it does not need.
+
+Dependency Inversion Principle	
+
+High-level modules should not depend on low-level modules, both should depend on abstractions.
 ```
