@@ -1,3 +1,7 @@
+https://www.educative.io/answers/what-are-the-solid-principles-in-java
+https://www.youtube.com/watch?v=BM_lSZPMClo
+https://github.com/Java-Techie-jt/solid-principles-example
+
 ```
 SRP
 OCP
