@@ -319,6 +319,24 @@ public interface Engine {
     public void start();
 }
 
+Now we can connect any type of Engine that implements the Engine interface to the Car class:
+
+public class Car {
+    private Engine engine;
+    public Car(Engine e) {
+        engine = e;
+    }
+    public void start() {
+        engine.start();
+    }
+}
+public class PetrolEngine implements Engine {
+   public void start() {...}
+}
+public class DieselEngine implements Engine {
+   public void start() {...}
+}
+
 Projects
 Skill Paths
 Assessments
